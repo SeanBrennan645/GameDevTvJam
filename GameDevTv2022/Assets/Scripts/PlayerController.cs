@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpForce = 5f;
+    [SerializeField] float wallJumpForce = 5f;
     [SerializeField] float timeBetweenJumps = 0.5f;
     [SerializeField] int extraJumps = 1;
     [SerializeField] Collider2D feet;
+    [SerializeField] Collider2D side;
 
     public bool isActive = true;
 
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 rawInput;
     private int jumpCount;
     private bool isJumping;
+    private bool inAir;
     private Rigidbody2D rb;
 
 
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         jumpCount = 0;
+        inAir = false;
     }
 
     void FixedUpdate()
@@ -45,6 +49,7 @@ public class PlayerController : MonoBehaviour
             if (feet.IsTouchingLayers(LayerMask.GetMask(platformLayer)))
             {
                 jumpCount = 0;
+                inAir = false;
             }
         }
     }
@@ -63,12 +68,27 @@ public class PlayerController : MonoBehaviour
         if(!isJumping && jumpCount < extraJumps)
         {
             isJumping = true;
-            jumpCount++;
+            inAir = true;
 
-            rb.velocity = new Vector2(0.0f, 0.0f);
-            rb.velocity += new Vector2(0f, jumpForce);
+            if (side.IsTouchingLayers(LayerMask.GetMask(platformLayer)))
+            {
+                Debug.Log("We Here?");
+                rb.velocity = new Vector2(0.0f, 0.0f);
+                Vector2 momentum = new Vector2(wallJumpForce, jumpForce);
+                Debug.Log(momentum);
+                rb.velocity += new Vector2(wallJumpForce, jumpForce);
+                yield break;
+            }
+            else
+            {
+                Debug.Log("Or Here?");
+                jumpCount++;
 
-            yield return new WaitForSeconds(timeBetweenJumps);
+                rb.velocity = new Vector2(0.0f, 0.0f);
+                rb.velocity += new Vector2(0f, jumpForce);
+
+                yield return new WaitForSeconds(timeBetweenJumps);
+            }
         }
     }
 }
