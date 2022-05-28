@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField] GameObject PlayerTilePrefab;
     [SerializeField] [Range(0, 50)] int PoolSize = 5;
+    [SerializeField] TextMeshProUGUI text;
 
     private GameObject[] pool;
+    private int currentAvailable;
 
     private void Awake()
     {
         PopulatePool();
+        currentAvailable = PoolSize;
     }
 
     private void PopulatePool()
@@ -33,6 +37,8 @@ public class ObjectPool : MonoBehaviour
             {
                 pool[i].transform.position = position;
                 pool[i].SetActive(true);
+                currentAvailable--;
+                text.text = "Bodies Remaining: " + currentAvailable;
                 return;
             }
         }
