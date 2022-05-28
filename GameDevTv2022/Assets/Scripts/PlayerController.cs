@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int extraJumps = 1;
     [SerializeField] Collider2D feet;
     [SerializeField] Collider2D side;
+    [SerializeField] Vector3 StartPosition;
 
     public bool isActive = true;
 
@@ -90,5 +91,16 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(timeBetweenJumps);
             }
         }
+    }
+
+    void OnDie(InputValue value)
+    {
+        if (!isActive) { return; }
+        RefreshPlayer();
+    }
+
+    public void RefreshPlayer()
+    {
+        transform.position = StartPosition;
     }
 }

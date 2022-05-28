@@ -4333,6 +4333,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8124854763809590933, guid: 455a2cadf2b7f944c95878cabbe80fc0, type: 3}
   m_PrefabInstance: {fileID: 1026853104}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1314547685 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4253297328530706513, guid: 386af45775f34f94ea083fad2d0054a6, type: 3}
+  m_PrefabInstance: {fileID: 4253297329257813815}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1443853966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4767,8 +4772,20 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1974945647, guid: 386af45775f34f94ea083fad2d0054a6, type: 3}
+      propertyPath: StartPosition
+      value: 
+      objectReference: {fileID: 1314547685}
+    - target: {fileID: 1974945647, guid: 386af45775f34f94ea083fad2d0054a6, type: 3}
       propertyPath: wallJumpForce
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974945647, guid: 386af45775f34f94ea083fad2d0054a6, type: 3}
+      propertyPath: StartPosition.x
+      value: -11.5781975
+      objectReference: {fileID: 0}
+    - target: {fileID: 1974945647, guid: 386af45775f34f94ea083fad2d0054a6, type: 3}
+      propertyPath: StartPosition.y
+      value: 4.6192636
       objectReference: {fileID: 0}
     - target: {fileID: 4253297328530706512, guid: 386af45775f34f94ea083fad2d0054a6, type: 3}
       propertyPath: m_Camera
