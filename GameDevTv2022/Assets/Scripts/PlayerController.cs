@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Collider2D feet;
     [SerializeField] Collider2D side;
     [SerializeField] Vector3 StartPosition;
+    [SerializeField] ObjectPool Pool;
 
     public bool isActive = true;
 
@@ -101,6 +102,12 @@ public class PlayerController : MonoBehaviour
 
     public void RefreshPlayer()
     {
+        SpawnPlayerTile();
         transform.position = StartPosition;
+    }
+
+    public void SpawnPlayerTile()
+    {
+        Pool.EnableObjectInPool(transform.position);
     }
 }
