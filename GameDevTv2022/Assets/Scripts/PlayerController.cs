@@ -100,6 +100,12 @@ public class PlayerController : MonoBehaviour
         RefreshPlayer();
     }
 
+    void OnReset(InputValue value)
+    {
+        if (!isActive) { return; }
+        LevelManager.Instance.RefreshLevel();
+    }
+
     public void RefreshPlayer()
     {
         SpawnPlayerTile();

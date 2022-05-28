@@ -16,6 +16,7 @@ public class ObjectPool : MonoBehaviour
     {
         PopulatePool();
         currentAvailable = PoolSize;
+        text.text = "Bodies Remaining: " + currentAvailable;
     }
 
     private void PopulatePool()
