@@ -6,15 +6,23 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
+    [Header("Values")]
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float jumpForce = 5f;
     [SerializeField] float wallJumpForce = 5f;
     [SerializeField] float timeBetweenJumps = 0.5f;
     [SerializeField] int extraJumps = 1;
+    [Header("Colliders")]
     [SerializeField] Collider2D feet;
     [SerializeField] Collider2D side;
+    [Header("Other")]
     [SerializeField] Vector3 StartPosition;
     [SerializeField] ObjectPool Pool;
+    //Audios
+    [Header("SFX")]
+    [SerializeField] AudioClip coinAudio;
+    [SerializeField] AudioClip deathAudio;
+    [SerializeField] AudioClip jumpAudio;
 
     public bool isActive = true;
 
@@ -24,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     private bool inAir;
     private Rigidbody2D rb;
+    private AudioSource audioSource;
 
 
     const string platformLayer = "Platform";
@@ -33,6 +42,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         jumpCount = 0;
         inAir = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -79,6 +89,7 @@ public class PlayerController : MonoBehaviour
                 Vector2 momentum = new Vector2(wallJumpForce, jumpForce);
                 Debug.Log(momentum);
                 rb.velocity += new Vector2(wallJumpForce, jumpForce);
+                audioSource.PlayOneShot(jumpAudio);
                 yield break;
             }
             else
@@ -88,6 +99,8 @@ public class PlayerController : MonoBehaviour
 
                 rb.velocity = new Vector2(0.0f, 0.0f);
                 rb.velocity += new Vector2(0f, jumpForce);
+
+                audioSource.PlayOneShot(jumpAudio);
 
                 yield return new WaitForSeconds(timeBetweenJumps);
             }
@@ -109,11 +122,17 @@ public class PlayerController : MonoBehaviour
     public void RefreshPlayer()
     {
         SpawnPlayerTile();
+        audioSource.PlayOneShot(deathAudio);
         transform.position = StartPosition;
     }
 
     public void SpawnPlayerTile()
     {
         Pool.EnableObjectInPool(transform.position);
+    }
+
+    public void PlayCoinSFX()
+    {
+        audioSource.PlayOneShot(coinAudio);
     }
 }
