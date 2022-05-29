@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
         jumpCount = 0;
         inAir = false;
         audioSource = GetComponent<AudioSource>();
+        StartPosition = transform.position;
     }
 
     void FixedUpdate()
