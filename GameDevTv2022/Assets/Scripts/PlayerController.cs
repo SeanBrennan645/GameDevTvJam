@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Collider2D feet;
     [SerializeField] Collider2D side;
     [Header("Other")]
-    [SerializeField] Vector3 StartPosition;
+    
     [SerializeField] ObjectPool Pool;
     //Audios
     [Header("SFX")]
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private bool inAir;
     private Rigidbody2D rb;
     private AudioSource audioSource;
-
+    private Vector3 StartPosition;
 
     const string platformLayer = "Platform";
 
