@@ -82,28 +82,36 @@ public class PlayerController : MonoBehaviour
             isJumping = true;
             inAir = true;
 
-            if (side.IsTouchingLayers(LayerMask.GetMask(platformLayer)))
-            {
-                Debug.Log("We Here?");
-                rb.velocity = new Vector2(0.0f, 0.0f);
-                Vector2 momentum = new Vector2(wallJumpForce, jumpForce);
-                Debug.Log(momentum);
-                rb.velocity += new Vector2(wallJumpForce, jumpForce);
-                audioSource.PlayOneShot(jumpAudio);
-                yield break;
-            }
-            else
-            {
-                Debug.Log("Or Here?");
-                jumpCount++;
+            //if (side.IsTouchingLayers(LayerMask.GetMask(platformLayer)))
+            //{
+            //    Debug.Log("We Here?");
+            //    rb.velocity = new Vector2(0.0f, 0.0f);
+            //    Vector2 momentum = new Vector2(wallJumpForce, jumpForce);
+            //    Debug.Log(momentum);
+            //    rb.velocity += new Vector2(wallJumpForce, jumpForce);
+            //    audioSource.PlayOneShot(jumpAudio);
+            //    yield break;
+            //}
+            //else
+            //{
+            //    Debug.Log("Or Here?");
+            //    jumpCount++;
 
-                rb.velocity = new Vector2(0.0f, 0.0f);
-                rb.velocity += new Vector2(0f, jumpForce);
+            //    rb.velocity = new Vector2(0.0f, 0.0f);
+            //    rb.velocity += new Vector2(0f, jumpForce);
 
-                audioSource.PlayOneShot(jumpAudio);
+            //    audioSource.PlayOneShot(jumpAudio);
 
-                yield return new WaitForSeconds(timeBetweenJumps);
-            }
+            //    yield return new WaitForSeconds(timeBetweenJumps);
+            //}
+            jumpCount++;
+
+            rb.velocity = new Vector2(0.0f, 0.0f);
+            rb.velocity += new Vector2(0f, jumpForce);
+
+            audioSource.PlayOneShot(jumpAudio);
+
+            yield return new WaitForSeconds(timeBetweenJumps);
         }
     }
 
